@@ -1,6 +1,6 @@
 # sway.nix
 
-{ pkgs, lib, config, ... }: {
+{ pkgs, config, ... }: {
 
   config = {
 

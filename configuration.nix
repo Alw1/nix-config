@@ -28,7 +28,7 @@
   networking.networkmanager.enable = true;
 
   hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  hardware.bluetooth.powerOnBoot = false; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
 
   # Set your time zone.
@@ -78,7 +78,9 @@
 	    autosuggestions.enable = true;
 	    shellAliases = {
 	      nix-upgrade = ''sudo nixos-rebuild switch --flake ~/nixos-config'';
+	      config = ''/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'';
 	    };
+
     };
 
     firefox.enable = true;
@@ -124,7 +126,6 @@
     nerdfonts
     
     #CLI utilities
-    fastfetch
     nitch
     zip
     unzip
