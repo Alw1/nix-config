@@ -114,7 +114,7 @@
     ghc 
     jdk
     git
-    vscode
+    codium
 
     #Personal stuff
     spotify
