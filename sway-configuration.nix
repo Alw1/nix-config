@@ -22,6 +22,7 @@
       swaylock  #screen locker
       swaybg    #background 
       waybar
+      libnotify #for notifications
       mako      #notification daemon
       kitty     #terminal
       wofi      #launcher  
