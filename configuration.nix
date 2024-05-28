@@ -114,7 +114,7 @@
     ghc 
     jdk
     git
-    codium
+    vscodium
 
     #Personal stuff
     spotify
@@ -132,5 +132,7 @@
     silver-searcher
   ];
 
+  #NOTE: Never change this, doesn't affect system upgrades
+  #      Keep as the first version when the system was installed 
   system.stateVersion = "23.11"; # Did you read the comment?
 }

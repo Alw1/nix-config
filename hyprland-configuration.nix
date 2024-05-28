@@ -13,7 +13,7 @@
     
     environment.systemPackages = with pkgs; [
         hyprland
-        sww
+        swww
 
     ];
   };
