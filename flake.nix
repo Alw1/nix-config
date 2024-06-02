@@ -1,7 +1,7 @@
 # /etc/nixos/flake.nix
 {
   inputs = {
- 	 nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+ 	 nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
   };
   outputs = inputs@{ self, nixpkgs, ... }: {
     # NOTE: 'nix' on the next line is the hostname 

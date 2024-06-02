@@ -77,10 +77,10 @@
 	    enableCompletion = true;
 	    autosuggestions.enable = true;
 	    shellAliases = {
-	      nix-upgrade = ''sudo nixos-rebuild switch --flake ~/nixos-config'';
+	      nixos-upgrade = ''nix flake upgrade --flake ~/nixos-config && sudo nixos-rebuild switch --flake ~/nixos-config'';
 	      config = ''/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'';
+	      fuck = ''echo "FUCK"'';
 	    };
-
     };
 
     firefox.enable = true;
@@ -103,13 +103,14 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    #Progrmaming stuff
+    #Programming stuff
     neovim
     vim
     gcc	
     gnumake
     python3	
     rustc
+    cargo
     go
     ghc 
     jdk
@@ -124,12 +125,25 @@
     #System stuff 
     gtk-engine-murrine
     nerdfonts
-    
+    intel-one-mono 
+    papers
+
     #CLI utilities
     nitch
     zip
     unzip
+    ranger
+    gotop
     silver-searcher
+
+	cosmic-session
+	cosmic-comp
+	cosmic-icons
+	cosmic-applets
+	cosmic-settings
+
+
+
   ];
 
   #NOTE: Never change this, doesn't affect system upgrades
