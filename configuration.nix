@@ -79,7 +79,6 @@
 	    shellAliases = {
 	      nixos-upgrade = ''nix flake upgrade --flake ~/nixos-config && sudo nixos-rebuild switch --flake ~/nixos-config'';
 	      config = ''/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'';
-	      fuck = ''echo "FUCK"'';
 	    };
     };
 
