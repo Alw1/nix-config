@@ -15,12 +15,29 @@
     options = "--delete-older-than 7d";
   };
 
-  #enable flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+#  boot.loader.systemd-boot.enable = true;
+#  boot.loader.efi.canTouchEfiVariables = true;
+  
+#  boot.loader = {
+#	systemd-boot.enable = true;
+#	efi.canTouchEfiVariables = true;
+# };
+
+    boot.loader = {
+        efi = {
+            canTouchEfiVariables = true;
+            efiSysMountPoint = "/boot/"; # ← use the same mount point here.
+        };
+        grub = {
+            enable = true;
+            efiSupport = true;
+            #efiInstallAsRemovable = true;
+            device = "nodev";
+        };
+    };
 
   networking.hostName = "nix"; # Define your hostname.
 
@@ -40,14 +57,22 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # Display Manager
+  services.greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+          user = "greeter";
+        };
+      };
+  };
+
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
   # Enable CUPS to print documents.
@@ -70,6 +95,14 @@
     #media-session.enable = true;
   };
 
+ #Services for laptop battery optimization
+ services.power-profiles-daemon.enable = false;
+ services.tlp = {
+    enable = true;
+ }; 
+ 
+ services.thermald.enable = true;
+
 
   programs = {
     zsh = {
@@ -78,7 +111,7 @@
 	    autosuggestions.enable = true;
 	    shellAliases = {
 	      nixos-upgrade = ''nix flake upgrade --flake ~/nixos-config && sudo nixos-rebuild switch --flake ~/nixos-config'';
-	      config = ''/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'';
+#	      config = ''/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'';
 	    };
     };
 
@@ -91,10 +124,11 @@
     };	
   };
 
+ users.defaultUserShell = pkgs.zsh;
+
   users.users.alex = {
     isNormalUser = true;
     description = "Alex Wyatt";
-    shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" ];  
   };
 
@@ -108,13 +142,13 @@
     gcc	
     gnumake
     python3	
-    rustc
-    cargo
-    go
-    ghc 
+    go 
+    ghc
+    cabal-install
     jdk
     git
-    vscodium
+    vscode
+    libreoffice
 
     #Personal stuff
     spotify
@@ -123,9 +157,14 @@
 
     #System stuff 
     gtk-engine-murrine
-    nerdfonts
-    intel-one-mono 
-    papers
+    nixos-icons
+    gruvbox-gtk-theme
+    xz
+    pkg-config 
+    gmp
+    ncurses
+    zlib
+    ripgrep
 
     #CLI utilities
     nitch
@@ -134,15 +173,14 @@
     ranger
     gotop
     silver-searcher
-
-	cosmic-session
-	cosmic-comp
-	cosmic-icons
-	cosmic-applets
-	cosmic-settings
+  ];
 
 
-
+  fonts.packages = with pkgs; [
+    intel-one-mono 
+    monocraft
+    nerdfonts
+    font-awesome
   ];
 
   #NOTE: Never change this, doesn't affect system upgrades
