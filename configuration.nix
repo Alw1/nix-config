@@ -87,6 +87,7 @@
  services.power-profiles-daemon.enable = false;
  services.tlp = {
     enable = true;
+
  }; 
 
  services.thermald.enable = true;
@@ -143,7 +144,6 @@
 
     #System stuff 
     gtk-engine-murrine
-    nixos-icons
     gruvbox-gtk-theme
     xz
     pkg-config 
