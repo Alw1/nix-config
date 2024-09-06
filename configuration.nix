@@ -54,7 +54,7 @@
       enable = true;
       settings = {
         default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway --remember --asterisks";
           user = "greeter";
         };
       };
@@ -86,9 +86,24 @@
  #Services for laptop battery optimization
  services.power-profiles-daemon.enable = false;
  services.tlp = {
-    enable = true;
+      enable = true;
+      settings = {
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
+        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
- }; 
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+
+        CPU_MIN_PERF_ON_AC = 0;
+        CPU_MAX_PERF_ON_AC = 100;
+        CPU_MIN_PERF_ON_BAT = 0;
+        CPU_MAX_PERF_ON_BAT = 80;
+
+       #Optional helps save long term battery health
+	   #START_CHARGE_THRESH_BAT0 = 40; 
+	   #STOP_CHARGE_THRESH_BAT0 = 80; 
+      };
+};
 
  services.thermald.enable = true;
 
@@ -97,8 +112,9 @@
 	    enable = true;
 	    enableCompletion = true;
 	    autosuggestions.enable = true;
+		syntaxHighlighting.enable = true;
 	    shellAliases = {
-	      nixos-upgrade = ''nix flake upgrade --flake ~/nixos-config && sudo nixos-rebuild switch --flake ~/nixos-config'';
+	      nixos-upgrade = ''nix flake upgrade --flake ~/nix-config && sudo nixos-rebuild switch --flake ~/nix-config'';
 	    };
     };
 
@@ -131,6 +147,9 @@
     python3	
     go 
     ghc
+	mars-mips
+	xspim
+	qtspim
     cabal-install
     jdk
     git
@@ -141,6 +160,7 @@
     spotify
     discord
     melonDS
+	vencord
 
     #System stuff 
     gtk-engine-murrine
@@ -153,7 +173,7 @@
     ripgrep
 
     #CLI utilities
-    nitch
+    hyfetch
     zip
     unzip
     ranger
