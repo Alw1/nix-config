@@ -1,15 +1,15 @@
 { config, pkgs, ... }: {
 
-	imports =
-    [ 
+	imports = [ 
       ./hardware-configuration.nix
-      ./sway-configuration.nix
+      ./sway.nix
+	  ./virtualization.nix
     ];
 
 	services.gvfs.enable = true;
 	services.udisks2.enable = true;
 
-  # Garbage collector
+	# Garbage collector
 	nix.gc = {
 		automatic = true;
 		dates = "weekly";
@@ -109,9 +109,9 @@
 			enableCompletion = true;
 			autosuggestions.enable = true;
 			syntaxHighlighting.enable = true;
-			shellAliases = {
-			  upgrade-nixos = ''nix flake upgrade --flake ~/nix-config && sudo nixos-rebuild switch --flake ~/nix-config'';
-			};
+			# shellAliases = {
+			#   upgrade-nixos = ''nix flake upgrade --flake ~/nix-config && sudo nixos-rebuild switch --flake ~/nix-config'';
+			# };
 		};
 
 		firefox.enable = true;
@@ -139,10 +139,11 @@
 		neovim
 		wl-clipboard
 
+		openconnect
 		vim
-		gcc	
+		gcc
 		gnumake
-		python3	
+		python3
 		go 
 		ghc
 		cabal-install
@@ -161,7 +162,6 @@
 
 		#System stuff 
 		gtk-engine-murrine
-		gruvbox-gtk-theme
 		adwaita-icon-theme
 		xz
 		pkg-config 
@@ -170,7 +170,6 @@
 		zlib
 		ripgrep
 		usbutils
-		libvirt
 		gnome-boxes
 		spice
 

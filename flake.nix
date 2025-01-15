@@ -8,7 +8,10 @@
     # NOTE: 'nix' on the next line is the hostname 
     nixosConfigurations.nix = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [ ./configuration.nix ];
+      modules = [ ./configuration.nix
+				  # ./sway.nix
+				  # ./virtualization.nix
+			];
     };
   };
 }
