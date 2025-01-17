@@ -1,9 +1,0 @@
-Documentation for my nix config to learn some shit.
-
--running (nix flake update) will update the lock file of the flake, not update the system.
- to update the system, run nix flake update first to update the flake.lock file, then run  my zsh alias, 
- nix-upgrade (alias for sudo nixos-rebuild switch --flake /nixos-config/),
- to apply the new config specified by the flake to the system.
-
--TODO: Write a bash script to rmeove old generations from the boot menu, or figure out a way
-       to do it if there is a pre-existing command to do so. 

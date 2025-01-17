@@ -32,7 +32,6 @@ let programs = {
 		snes9x
 	  ];
 	};
-in
-{
+in {
   environment.systemPackages = lib.concatLists (lib.attrValues programs);
 }
