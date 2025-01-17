@@ -27,6 +27,7 @@ let programs = {
 	  ];
 	  miscPrograms = [
 		spotify
+		mongodb-compass
 		discord
 		melonDS
 		snes9x

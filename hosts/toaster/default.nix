@@ -12,6 +12,11 @@
 
   hardware.bluetooth.enable = true;
 
+	services.mongodb = {
+	  enable = true;
+	  package = pkgs.mongo-ce;
+	};
+
   services = {
 	openssh = {
 		enable = true;
@@ -84,6 +89,7 @@
 			shellAliases = {
 				update-flake = ''nix flake update --flake ~/nix-config'';
 				update-nix = ''sudo nixos-rebuild switch --flake ~/nix-config'';
+				update-toaster = ''sudo nixos-rebuild switch --flake ~/nix-config#toaster'';
 			 };
 		};
 
