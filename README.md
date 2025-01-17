@@ -1,6 +1,6 @@
 Configuration files for my NixOS install with Sway.
 
-
+```
 Current Structure:
 ├── common
 │   ├── default.nix
@@ -16,3 +16,5 @@ Current Structure:
 │       └── hardware-configuration.nix
 ├── packages
 └── README.md
+```
+

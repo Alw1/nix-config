@@ -1,4 +1,4 @@
-{pkgs, config}:
+{pkgs, config, ...}:
 let 
 	user = "alex";
 in {

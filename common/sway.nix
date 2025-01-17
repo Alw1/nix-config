@@ -7,9 +7,9 @@
 			};
 			xwayland.enable = true;
 		    nm-applet.enable = true;
+			dconf.enable = true;
 		};
 
-		services.dconf.enable = true;
 		services.gnome.gnome-keyring.enable = true;
 
 		environment.systemPackages = with pkgs; [

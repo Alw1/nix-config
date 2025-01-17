@@ -4,7 +4,6 @@
     ./hardware-configuration.nix
     ../../common
 	../../users/alex.nix
-	./network.nix
   ];
 
   time.timeZone = "America/New_York";
@@ -14,7 +13,7 @@
 
 	services.mongodb = {
 	  enable = true;
-	  package = pkgs.mongo-ce;
+	  package = pkgs.mongodb-ce;
 	};
 
   services = {
@@ -61,7 +60,7 @@
 		};
 	};
 
-	services.xserver = {
+	xserver = {
 		enable = true;
 		xkb.layout = "us";
 		xkb.variant = "";

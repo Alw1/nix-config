@@ -5,6 +5,7 @@ let programs = {
 		gotop
 		tree
 		zip 
+		ripgrep
 		unzip
 		xz
 	  ];
@@ -28,6 +29,8 @@ let programs = {
 	  miscPrograms = [
 		spotify
 		mongodb-compass
+		mongosh
+		mongodb-tools
 		discord
 		melonDS
 		snes9x
