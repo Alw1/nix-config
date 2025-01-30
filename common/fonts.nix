@@ -4,5 +4,6 @@
 		intel-one-mono 
 		nerdfonts
 		font-awesome
+		monaspace
 	];
 }

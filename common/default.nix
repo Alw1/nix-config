@@ -3,9 +3,8 @@
 		./fonts.nix
 		./programs.nix
 		./sway.nix
+		./hyprland.nix
 	];
-
-	nixpkgs.config.allowUnfree = true;
 
 	nix = {
 		gc = {
@@ -14,6 +13,7 @@
 			options = "--delete-older-than 7d";
 		};
 
+		settings.auto-optimise-store = true;
 		settings.experimental-features = ["nix-command" "flakes"];
 	};
 }

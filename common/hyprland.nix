@@ -1,11 +1,14 @@
 { config, pkgs, ... }: {
 	config = {
 		programs = {
-			sway = {
+			hyprland = {
 				enable = true;
-				wrapperFeatures.gtk = true;
+				xwayland.enable = true;
+				withUWSM  = true;
+
 			};
-			xwayland.enable = true;
+			hyprlock.enable = true;
+			hypridle.enable = true;
 			nm-applet.enable = true;
 			dconf.enable = true;
 			nautilus-open-any-terminal = {
@@ -14,14 +17,13 @@
 			};
 		};
 
-		services.gnome.sushi.enable = true;
+		environment.sessionVariables = {
+			NIXOS_OZONE_WL = "1";
+		};
+
 		services.gnome.gnome-keyring.enable = true;
 
 		environment.systemPackages = with pkgs; [
-			sway
-			swayidle
-			swaylock
-			swaybg
 			waybar
 			wl-clipboard
 			libnotify 

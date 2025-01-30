@@ -5,13 +5,11 @@ let programs = {
 		gotop
 		tree
 		zip 
-		ripgrep
 		unzip
 		xz
 	  ];
 	  programmingUtils = [
 		vim 
-		neovim
 		vscode
 		git
 		gnumake
@@ -20,22 +18,33 @@ let programs = {
 		go
 		jdk
 		rustc
+		python3
+		nodejs
 		cargo
 		cabal-install
-	  ];
-	  video = [
+	];
+	neovimUtils = [
+		neovim
+		rust-analyzer
+		ripgrep
+		haskell-language-server
+	];
+
+	video = [
 		vlc
-	  ];
-	  miscPrograms = [
+	];
+	miscPrograms = [
 		spotify
 		mongodb-compass
 		mongosh
 		mongodb-tools
 		discord
+		openconnect
 		melonDS
 		snes9x
-	  ];
-	};
+	];
+};
 in {
-  environment.systemPackages = lib.concatLists (lib.attrValues programs);
+	nixpkgs.config.allowUnfree = true;
+	environment.systemPackages = lib.concatLists (lib.attrValues programs);
 }

@@ -1,95 +1,98 @@
 { config, pkgs, lib, ... }: {
 
-  imports = [
-    ./hardware-configuration.nix
-    ../../common
-	../../users/alex.nix
-  ];
+	imports = [
+		./hardware-configuration.nix
+		../../common
+		../../users/alex.nix
+	];
 
-  time.timeZone = "America/New_York";
-  i18n.defaultLocale = "en_US.UTF-8";
+	time.timeZone = "America/New_York";
+	i18n.defaultLocale = "en_US.UTF-8";
 
-  hardware.bluetooth.enable = true;
+	hardware.bluetooth.enable = true;
+	hardware.bluetooth.powerOnBoot = false;
+	hardware.rtl-sdr.enable = true;
 
 	services.mongodb = {
-	  enable = true;
-	  package = pkgs.mongodb-ce;
+		enable = true;
+		package = pkgs.mongodb-ce;
 	};
 
-  services = {
-	openssh = {
-		enable = true;
-		settings = {
-			X11Forwarding = true;
-			PermitRootLogin = "no"; # disable root login
-			PasswordAuthentication = false; # disable password login
+	services = {
+		openssh = {
+			enable = true;
+			settings = {
+				X11Forwarding = false;
+				PermitRootLogin = "no";
+			};
+			openFirewall = true;
 		};
-		openFirewall = true;
-    };
 
-	gvfs.enable = true;
-	udisks2.enable = true;
-	printing.enable = true;
+		gvfs.enable = true;
+		udisks2.enable = true;
+		printing.enable = true;
 
-	power-profiles-daemon.enable = false; # Need to disable to enable tlp
-	thermald.enable = true;
-	tlp = {
-	  enable = true;
-	  settings = {
-		CPU_SCALING_GOVERNOR_ON_AC = "performance";
-		CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+		power-profiles-daemon.enable = false; # Need to disable to enable tlp
+		thermald.enable = true;
+		upower.enable = true;
+		tlp = {
+			enable = true;
+			settings = {
+				CPU_SCALING_GOVERNOR_ON_AC = "performance";
+				CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
-		CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-		CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+				CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+				CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
 
-		CPU_MIN_PERF_ON_AC = 0;
-		CPU_MAX_PERF_ON_AC = 100;
-		CPU_MIN_PERF_ON_BAT = 0;
-		CPU_MAX_PERF_ON_BAT = 80;
-	  };
-	};
+				CPU_MIN_PERF_ON_AC = 0;
+				CPU_MAX_PERF_ON_AC = 100;
+				CPU_MIN_PERF_ON_BAT = 0;
+				CPU_MAX_PERF_ON_BAT = 80;
+			};
+		};
 
-	blueman.enable = true;
+		blueman.enable = true;
 
-	displayManager.ly = {
-		enable = true;
-		settings = {
-			animation = "matrix";
-			load = true;
-			save = true;
+		displayManager.ly = {
+			enable = true;
+			settings = {
+				animation = "matrix";
+				load = true;
+				save = true;
+			};
+		};
+
+		xserver = {
+			enable = true;
+			xkb.layout = "us";
+			xkb.variant = "";
 		};
 	};
 
-	xserver = {
-		enable = true;
-		xkb.layout = "us";
-		xkb.variant = "";
+	boot.loader = {
+		efi = {
+			canTouchEfiVariables = true;
+			efiSysMountPoint = "/boot/"; 
+		};
+		grub = {
+			enable = true;
+			efiSupport = true;
+			useOSProber = true;
+			device = "nodev";
+		};
 	};
-  };
 
-  boot.loader = {
-  	efi = {
-  		canTouchEfiVariables = true;
-  		efiSysMountPoint = "/boot/"; 
-  	};
-  	grub = {
-  		enable = true;
-  		efiSupport = true;
-  		device = "nodev";
-  	};
-  };
- 
 	programs = {
 		zsh = {
 			enable = true;
 			enableCompletion = true;
+			enableLsColors = true;
 			autosuggestions.enable = true;
 			syntaxHighlighting.enable = true;
 			shellAliases = {
-				update-flake = ''nix flake update --flake ~/nix-config'';
-				update-nix = ''sudo nixos-rebuild switch --flake ~/nix-config'';
-				update-toaster = ''sudo nixos-rebuild switch --flake ~/nix-config#toaster'';
-			 };
+				toaster-update = ''nix flake update --flake ~/nix-config'';
+				toaster-upgrade = ''sudo nixos-rebuild switch --flake ~/nix-config#toaster'';
+			};
 		};
 
 		firefox.enable = true;
@@ -98,14 +101,21 @@
 			enable = true;
 			remotePlay.openFirewall = true; 
 			dedicatedServer.openFirewall = true; 
+			protontricks.enable = true;
 		};	
 
+		neovim = {
+			enable = true;
+			defaultEditor = true;
+		};
 	};
 
-  networking = {
-    hostName = "toaster";
-    networkmanager.enable = true;
-  };
+	networking = {
+		hostName = "toaster";
+		networkmanager.enable = true;
+		firewall.enable = true;
+		nftables.enable = true;
+	};
 
-  system.stateVersion = "23.11"; 
+	system.stateVersion = "23.11"; 
 }
