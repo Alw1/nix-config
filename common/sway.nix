@@ -14,9 +14,6 @@
 			};
 		};
 
-		services.gnome.sushi.enable = true;
-		services.gnome.gnome-keyring.enable = true;
-
 		environment.systemPackages = with pkgs; [
 			sway
 			swayidle

@@ -11,7 +11,6 @@
 
 	hardware.bluetooth.enable = true;
 	hardware.bluetooth.powerOnBoot = false;
-	hardware.rtl-sdr.enable = true;
 
 	services.mongodb = {
 		enable = true;
@@ -48,6 +47,10 @@
 				CPU_MAX_PERF_ON_AC = 100;
 				CPU_MIN_PERF_ON_BAT = 0;
 				CPU_MAX_PERF_ON_BAT = 80;
+
+
+				TLP_DEFAULT_MODE = "BAT";
+				TLP_PERSISTENT_DEFAULT = 1;
 			};
 		};
 

@@ -4,27 +4,23 @@
 			hyprland = {
 				enable = true;
 				xwayland.enable = true;
-				withUWSM  = true;
-
 			};
 			hyprlock.enable = true;
-			hypridle.enable = true;
 			nm-applet.enable = true;
 			dconf.enable = true;
-			nautilus-open-any-terminal = {
-				enable = true;
-				terminal = "kitty";
-			};
 		};
+
+		services.hypridle.enable = true;
 
 		environment.sessionVariables = {
 			NIXOS_OZONE_WL = "1";
+			WLR_NO_HARDWARE_CURSORS = "1";
 		};
 
-		services.gnome.gnome-keyring.enable = true;
-
 		environment.systemPackages = with pkgs; [
+			swww
 			waybar
+			xdg-desktop-portal-hyprland
 			wl-clipboard
 			libnotify 
 			mako
@@ -37,7 +33,7 @@
 			brightnessctl
 			networkmanagerapplet
 			papers
-			nautilus
+			cosmic-files
 			eog
 			fuzzel
 		];

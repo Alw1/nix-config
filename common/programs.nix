@@ -4,6 +4,7 @@ let programs = {
 		hyfetch
 		gotop
 		tree
+		stow
 		zip 
 		unzip
 		xz
@@ -29,7 +30,6 @@ let programs = {
 		ripgrep
 		haskell-language-server
 	];
-
 	video = [
 		vlc
 	];
@@ -39,6 +39,7 @@ let programs = {
 		mongosh
 		mongodb-tools
 		discord
+		gnome-boxes
 		openconnect
 		melonDS
 		snes9x
