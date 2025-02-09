@@ -12,11 +12,6 @@
 	hardware.bluetooth.enable = true;
 	hardware.bluetooth.powerOnBoot = false;
 
-	services.mongodb = {
-		enable = true;
-		package = pkgs.mongodb-ce;
-	};
-
 	services = {
 		openssh = {
 			enable = true;
@@ -47,14 +42,8 @@
 				CPU_MAX_PERF_ON_AC = 100;
 				CPU_MIN_PERF_ON_BAT = 0;
 				CPU_MAX_PERF_ON_BAT = 80;
-
-
-				TLP_DEFAULT_MODE = "BAT";
-				TLP_PERSISTENT_DEFAULT = 1;
 			};
 		};
-
-		blueman.enable = true;
 
 		displayManager.ly = {
 			enable = true;
@@ -80,7 +69,7 @@
 		grub = {
 			enable = true;
 			efiSupport = true;
-			useOSProber = true;
+			#useOSProber = true; # Use when dual booting to find other OS
 			device = "nodev";
 		};
 	};
@@ -93,8 +82,8 @@
 			autosuggestions.enable = true;
 			syntaxHighlighting.enable = true;
 			shellAliases = {
-				toaster-update = ''nix flake update --flake ~/nix-config'';
-				toaster-upgrade = ''sudo nixos-rebuild switch --flake ~/nix-config#toaster'';
+				airfryer-update = ''nix flake update --flake ~/nix-config'';
+				airfryer-upgrade = ''sudo nixos-rebuild switch --flake ~/nix-config#airfryer'';
 			};
 		};
 
@@ -116,8 +105,8 @@
 	networking = {
 		hostName = "airfryer";
 		networkmanager.enable = true;
-		firewall.enable = true;
-		nftables.enable = true;
+		# firewall.enable = true;
+		# nftables.enable = true;
 	};
 
 	system.stateVersion = "23.11"; 

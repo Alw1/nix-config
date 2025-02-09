@@ -35,11 +35,7 @@ let programs = {
 	];
 	miscPrograms = [
 		spotify
-		mongodb-compass
-		mongosh
-		mongodb-tools
 		discord
-		gnome-boxes
 		openconnect
 		melonDS
 		snes9x

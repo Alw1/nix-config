@@ -4,6 +4,7 @@
 		./programs.nix
 		./sway.nix
 		./hyprland.nix
+		./virtualization.nix
 	];
 
 	nix = {

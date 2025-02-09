@@ -23,6 +23,7 @@
 			xdg-desktop-portal-hyprland
 			wl-clipboard
 			libnotify 
+			blueberry
 			mako
 			kitty
 			grim
@@ -33,9 +34,9 @@
 			brightnessctl
 			networkmanagerapplet
 			papers
-			cosmic-files
 			eog
 			fuzzel
+			kanagawa-icon-theme
 		];
 	};
 }

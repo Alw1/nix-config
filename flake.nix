@@ -9,9 +9,18 @@
 		# };
 	};
 	outputs = { self, nixpkgs }: {
-		nixosConfigurations.airfryer = nixpkgs.lib.nixosSystem {
-			system = "x86_64-linux";
-			modules = [ ./hosts/airfryer ];
+		nixosConfigurations = {
+
+			airfryer = nixpkgs.lib.nixosSystem {
+				system = "x86_64-linux";
+				modules = [ ./hosts/airfryer ];
+			};
+
+			toaster = nixpkgs.lib.nixosSystem {
+				system = "x86_64-linux";
+				modules = [ ./hosts/toaster ];
+			};
+
 		};
 	};
 }
