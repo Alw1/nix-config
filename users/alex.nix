@@ -6,6 +6,6 @@ in {
 		isNormalUser = true;
 		description = "Alex Wyatt";
 		shell = pkgs.zsh;
-		extraGroups = [ "networkmanager" "wheel" "libvirtd" "plugdev" ];
+		extraGroups = [ "docker" "networkmanager" "wheel" "libvirtd" "plugdev" ];
 	};
 }

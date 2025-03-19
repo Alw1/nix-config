@@ -8,9 +8,19 @@
 			hyprlock.enable = true;
 			nm-applet.enable = true;
 			dconf.enable = true;
+
+			waybar = {
+				enable = true;
+			};
 		};
 
 		services.hypridle.enable = true;
+		security.polkit.enable = true; 
+     	xdg.portal.extraPortals = [ 
+			pkgs.xdg-desktop-portal-gtk 
+			pkgs.xdg-desktop-portal-wlr 
+			pkgs.xdg-desktop-portal-hyprland
+		];
 
 		environment.sessionVariables = {
 			NIXOS_OZONE_WL = "1";
@@ -19,11 +29,11 @@
 
 		environment.systemPackages = with pkgs; [
 			swww
-			waybar
-			xdg-desktop-portal-hyprland
+			ags
 			wl-clipboard
 			libnotify 
 			blueberry
+			nautilus
 			mako
 			kitty
 			grim

@@ -102,6 +102,8 @@
 		};
 	};
 
+	hardware.rtl-sdr.enable = true;
+	xdg.portal.wlr.enable = true;
 	networking = {
 		hostName = "airfryer";
 		networkmanager.enable = true;

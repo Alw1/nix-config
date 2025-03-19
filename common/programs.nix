@@ -4,8 +4,10 @@ let programs = {
 		hyfetch
 		gotop
 		tree
+		ventoy-full
 		stow
 		zip 
+		usbutils
 		unzip
 		xz
 	  ];
@@ -20,13 +22,14 @@ let programs = {
 		jdk
 		rustc
 		python3
-		nodejs
+		nodejs_18
 		cargo
 		cabal-install
 	];
 	neovimUtils = [
 		neovim
 		rust-analyzer
+		vhdl-ls
 		ripgrep
 		haskell-language-server
 	];
@@ -36,7 +39,12 @@ let programs = {
 	miscPrograms = [
 		spotify
 		discord
+		obsidian
 		openconnect
+		prismlauncher
+		gnuradio
+		gnuradioPackages.osmosdr
+		soapysdr
 		melonDS
 		snes9x
 	];
