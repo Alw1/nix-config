@@ -69,7 +69,7 @@
 		grub = {
 			enable = true;
 			efiSupport = true;
-			#useOSProber = true; # Use when dual booting to find other OS
+			useOSProber = true; # Use when dual booting to find other OS
 			device = "nodev";
 		};
 	};
@@ -82,8 +82,8 @@
 			autosuggestions.enable = true;
 			syntaxHighlighting.enable = true;
 			shellAliases = {
-				airfryer-update = ''nix flake update --flake ~/nix-config'';
-				airfryer-upgrade = ''sudo nixos-rebuild switch --flake ~/nix-config#airfryer'';
+				rotom-update = ''nix flake update --flake ~/nix-config'';
+				rotom-upgrade = ''sudo nixos-rebuild switch --flake ~/nix-config#airfryer'';
 			};
 		};
 
@@ -105,7 +105,7 @@
 	hardware.rtl-sdr.enable = true;
 	xdg.portal.wlr.enable = true;
 	networking = {
-		hostName = "airfryer";
+		hostName = "rotom";
 		networkmanager.enable = true;
 		# firewall.enable = true;
 		# nftables.enable = true;

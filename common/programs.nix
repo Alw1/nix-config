@@ -46,6 +46,8 @@ let programs = {
 		gnuradioPackages.osmosdr
 		soapysdr
 		melonDS
+		cheese
+		woeusb
 		snes9x
 	];
 };

@@ -11,9 +11,9 @@
 	outputs = { self, nixpkgs }: {
 		nixosConfigurations = {
 
-			airfryer = nixpkgs.lib.nixosSystem {
+			rotom = nixpkgs.lib.nixosSystem {
 				system = "x86_64-linux";
-				modules = [ ./hosts/airfryer ];
+				modules = [ ./hosts/rotom ];
 			};
 
 			toaster = nixpkgs.lib.nixosSystem {
