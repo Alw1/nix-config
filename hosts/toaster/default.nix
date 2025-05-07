@@ -1,10 +1,22 @@
-{ config, pkgs, lib, ... }: {
+{ pkgs, ... }: {
 
 	imports = [
 		./hardware-configuration.nix
 		../../common
 		../../users/alex.nix
 	];
+
+	nix = {
+		gc = {
+			automatic = true;
+			dates = "weekly";
+			options = "--delete-older-than 7d";
+		};
+
+		settings.auto-optimise-store = true;
+		settings.experimental-features = ["nix-command" "flakes"];
+	};
+
 
 	time.timeZone = "America/New_York";
 	i18n.defaultLocale = "en_US.UTF-8";

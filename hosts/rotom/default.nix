@@ -1,115 +1,131 @@
-{ config, pkgs, lib, ... }: {
+{ unstablePkgs, ... }: {
 
-	imports = [
-		./hardware-configuration.nix
-		../../common
-		../../users/alex.nix
-	];
+  imports = [
+    ./hardware-configuration.nix
+    ../../common
+    ../../users/alex/user.nix
+  ];
 
-	time.timeZone = "America/New_York";
-	i18n.defaultLocale = "en_US.UTF-8";
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
 
-	hardware.bluetooth.enable = true;
-	hardware.bluetooth.powerOnBoot = false;
+    settings.auto-optimise-store = true;
+    settings.experimental-features = [ "nix-command" "flakes" ];
+  };
 
-	services = {
-		openssh = {
-			enable = true;
-			settings = {
-				X11Forwarding = false;
-				PermitRootLogin = "no";
-			};
-			openFirewall = true;
-		};
+  time.timeZone = "America/New_York";
+  i18n.defaultLocale = "en_US.UTF-8";
 
-		gvfs.enable = true;
-		udisks2.enable = true;
-		printing.enable = true;
-
-		power-profiles-daemon.enable = false; # Need to disable to enable tlp
-		thermald.enable = true;
-		upower.enable = true;
-		tlp = {
-			enable = true;
-			settings = {
-				CPU_SCALING_GOVERNOR_ON_AC = "performance";
-				CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-
-				CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-				CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-
-				CPU_MIN_PERF_ON_AC = 0;
-				CPU_MAX_PERF_ON_AC = 100;
-				CPU_MIN_PERF_ON_BAT = 0;
-				CPU_MAX_PERF_ON_BAT = 80;
-			};
-		};
-
-		displayManager.ly = {
-			enable = true;
-			settings = {
-				animation = "matrix";
-				load = true;
-				save = true;
-			};
-		};
-
-		xserver = {
-			enable = true;
-			xkb.layout = "us";
-			xkb.variant = "";
-		};
+  hardware.bluetooth = {
+		enable = true;
+		powerOnBoot = false;
 	};
 
-	boot.loader = {
-		efi = {
-			canTouchEfiVariables = true;
-			efiSysMountPoint = "/boot/"; 
-		};
-		grub = {
-			enable = true;
-			efiSupport = true;
-			useOSProber = true; # Use when dual booting to find other OS
-			device = "nodev";
-		};
-	};
+  programs.nix-ld.enable = true;
+  services = {
+    openssh = {
+      enable = true;
+      ports = [ 22 ];
+      settings = {
+        PasswordAuthentication = true;
+        PermitRootLogin = "prohibit-password";
+      };
+    };
 
-	programs = {
-		zsh = {
-			enable = true;
-			enableCompletion = true;
-			enableLsColors = true;
-			autosuggestions.enable = true;
-			syntaxHighlighting.enable = true;
-			shellAliases = {
-				rotom-update = ''nix flake update --flake ~/nix-config'';
-				rotom-upgrade = ''sudo nixos-rebuild switch --flake ~/nix-config#airfryer'';
-			};
-		};
+    gvfs.enable = true;
+    udisks2.enable = true;
+    printing.enable = true;
 
-		firefox.enable = true;
+    power-profiles-daemon.enable = false; # Need to disable to enable tlp
+    thermald.enable = true;
+    upower.enable = true;
+    tlp = {
+      enable = true;
+      settings = {
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
+        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
-		steam = {
-			enable = true;
-			remotePlay.openFirewall = true; 
-			dedicatedServer.openFirewall = true; 
-			protontricks.enable = true;
-		};	
+        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
 
-		neovim = {
-			enable = true;
-			defaultEditor = true;
-		};
-	};
+        CPU_MIN_PERF_ON_AC = 0;
+        CPU_MAX_PERF_ON_AC = 100;
+        CPU_MIN_PERF_ON_BAT = 0;
+        CPU_MAX_PERF_ON_BAT = 80;
+      };
+    };
 
-	hardware.rtl-sdr.enable = true;
-	xdg.portal.wlr.enable = true;
-	networking = {
-		hostName = "rotom";
-		networkmanager.enable = true;
-		# firewall.enable = true;
-		# nftables.enable = true;
-	};
+    displayManager.ly = {
+      enable = true;
+      settings = {
+        animation = "matrix";
+        load = true;
+        save = true;
+        clear_password = true;
+      };
+    };
 
-	system.stateVersion = "23.11"; 
+    xserver = {
+      enable = true;
+      xkb.layout = "us";
+      xkb.variant = "";
+    };
+  };
+
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot/";
+    };
+    grub = {
+      # extraConfig = "set theme=${pkgs.plasma5.breeze-grub}/grub/themes/breeze/theme.txt";
+      # splashImage = null;
+      enable = true;
+      efiSupport = true;
+      useOSProber = true;
+      device = "nodev";
+    };
+  };
+
+  programs = {
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      enableLsColors = true;
+      autosuggestions.enable = true;
+      syntaxHighlighting.enable = true;
+      shellAliases = {
+        rotom-update = ''nix flake update --flake ~/nix-config'';
+        rotom-upgrade = ''sudo nixos-rebuild switch --flake ~/nix-config#$HOST'';
+      };
+    };
+
+    firefox.enable = true;
+
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+      protontricks.enable = true;
+    };
+
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+	  package = unstablePkgs.neovim;
+    };
+  };
+
+  networking = {
+    hostName = "rotom";
+    networkmanager.enable = true;
+    firewall.enable = true;
+    nftables.enable = true;
+  };
+
+  system.stateVersion = "23.11";
 }

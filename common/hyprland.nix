@@ -1,26 +1,34 @@
-{ config, pkgs, ... }: {
-	config = {
+{ pkgs, unstablePkgs, config, lib, ... }: {
+
+	options.hyprland.enable = lib.mkEnableOption "Enable Hyprland";
+	config = lib.mkIf config.hyprland.enable {
 		programs = {
 			hyprland = {
 				enable = true;
 				xwayland.enable = true;
 			};
 			hyprlock.enable = true;
-			nm-applet.enable = true;
-			dconf.enable = true;
-
-			waybar = {
+			waybar ={
 				enable = true;
+				package = unstablePkgs.waybar;
 			};
+			# nm-applet.enable = true;
+			
+			dconf.enable = true;
 		};
 
 		services.hypridle.enable = true;
 		security.polkit.enable = true; 
-     	xdg.portal.extraPortals = [ 
-			pkgs.xdg-desktop-portal-gtk 
-			pkgs.xdg-desktop-portal-wlr 
-			pkgs.xdg-desktop-portal-hyprland
-		];
+
+		xdg.portal = {
+		  enable = true;
+		  extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk ];
+		  config = {
+				common = {
+				  default = [ "hyprland" "gtk" ];
+			};
+		  };
+		};
 
 		environment.sessionVariables = {
 			NIXOS_OZONE_WL = "1";
@@ -30,6 +38,7 @@
 		environment.systemPackages = with pkgs; [
 			swww
 			ags
+			hyprpolkitagent
 			wl-clipboard
 			libnotify 
 			blueberry
@@ -46,7 +55,6 @@
 			papers
 			eog
 			fuzzel
-			kanagawa-icon-theme
 		];
 	};
 }

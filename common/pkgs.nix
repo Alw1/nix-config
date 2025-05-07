@@ -1,0 +1,62 @@
+{ pkgs, unstablePkgs, lib, ... }: with pkgs;
+
+let packages = {
+    cliPrograms = [
+      hyfetch
+      fastfetch
+      gotop
+      tree
+      ventoy-full
+      stow
+      pywal
+      usbutils
+      zip
+      unzip
+      xz
+      ripgrep
+    ];
+    programmingUtils = [
+      vim
+      vscode
+      git
+      gnumake
+      gcc
+      ghc
+      go
+      jdk
+      rustc
+      python3
+      python312Packages.pip
+      nodejs_20
+      cargo
+      cabal-install
+    ];
+    video = [
+      vlc
+    ];
+    miscPrograms = [
+      spotify
+      discord
+      libreoffice
+      prismlauncher
+      melonDS
+      gparted
+      gnome-disk-utility
+      cheese
+      woeusb
+      snes9x
+    ];
+  };
+in
+{
+  environment.systemPackages = lib.concatLists (lib.attrValues packages);
+
+  fonts.packages = [
+    intel-one-mono
+    nerdfonts
+    jetbrains-mono
+    font-awesome
+    monaspace
+  ];
+}
+

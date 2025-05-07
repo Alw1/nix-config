@@ -1,20 +1,8 @@
-{pkgs, lib, ... }: {
+{ ... }: {
 	imports = [
-		./fonts.nix
-		./programs.nix
-		./sway.nix
+		./networking.nix
+		./pkgs.nix
 		./hyprland.nix
 		./virtualization.nix
 	];
-
-	nix = {
-		gc = {
-			automatic = true;
-			dates = "weekly";
-			options = "--delete-older-than 7d";
-		};
-
-		settings.auto-optimise-store = true;
-		settings.experimental-features = ["nix-command" "flakes"];
-	};
 }
