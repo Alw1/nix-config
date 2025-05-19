@@ -12,6 +12,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+	# nixos-grub-themes.url = "github:jeslie0/nixos-grub-themes";
+
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager }:
@@ -29,7 +31,7 @@
 
         rotom = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [
+		modules = [
             ./hosts/rotom
             { nixpkgs.config.allowUnfree = true; }
             { _module.args.unstablePkgs = unstablePkgs; }
@@ -37,49 +39,10 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.alex = import ./home/alex.nix;
+              home-manager.users.alex = import ./users/alex/home.nix;
             }
-          ];
-        };
-
-        toaster = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/toaster
-            { nixpkgs.config.allowUnfree = true; }
-            { _module.args.unstablePkgs = unstablePkgs; }
           ];
         };
       };
     };
 }
-
-
-# {
-#   description = "Your NixOS configuration";
-#
-#   inputs = {
-#     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-#     home-manager.url = "github:nix-community/home-manager";
-#     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-#   };
-#
-#   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-#     nixosConfigurations = {
-#       rotom = nixpkgs.lib.nixosSystem {
-#         system = "x86_64-linux";
-#         modules = [
-#           ./hosts/rotom
-#           ./common
-#           ({ config, pkgs, ... }: {
-#             users.users.alex = (import ./users/alex).user;
-#             home-manager.users.alex = (import ./users/alex).home;
-#           })
-#           home-manager.nixosModules.home-manager
-#         ];
-#       };
-#       # ...other hosts
-#     };
-#   };
-# }
-

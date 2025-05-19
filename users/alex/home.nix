@@ -6,21 +6,27 @@
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Classic";
-    size = 16;
+    package = pkgs.capitaine-cursors-themed;
+    name = "Capitaine Cursors";
+    size = 15;
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
   };
 
   gtk = {
     enable = true;
     theme = {
-      package = pkgs.kanagawa-gtk-theme;
-      name = "Kanagawa";
+      # package = pkgs.sierra-gtk-theme;
+      name = "Adwaita";
     };
 
     iconTheme = {
-      package = pkgs.kanagawa-icon-theme;
-      name = "Kanagawa";
+      package = pkgs.adwaita-icon-theme;
+      name = "Adwaita";
     };
 
     font = {
@@ -30,6 +36,6 @@
     };
   };
 
-  programs.home-manager-enable = true;
+  programs.home-manager.enable = true;
   home.stateVersion = "24.11";
 }

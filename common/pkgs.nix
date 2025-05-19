@@ -10,6 +10,7 @@ let packages = {
       stow
       pywal
       usbutils
+	  yazi
       zip
       unzip
       xz
@@ -25,6 +26,7 @@ let packages = {
       go
       jdk
       rustc
+	  rustfmt
       python3
       python312Packages.pip
       nodejs_20
@@ -38,13 +40,10 @@ let packages = {
       spotify
       discord
       libreoffice
-      prismlauncher
-      melonDS
       gparted
       gnome-disk-utility
       cheese
       woeusb
-      snes9x
     ];
   };
 in

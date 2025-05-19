@@ -8,9 +8,8 @@
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
       shellAliases = {
-        rotom-update = ''nix flake update --flake ~/nix-config'';
-        rotom-upgrade = ''sudo nixos-rebuild switch --flake ~/nix-config#$HOST'';
+        system-update = ''nix flake update --flake ~/nix-config'';
+        system-upgrade = ''sudo nixos-rebuild switch --flake ~/nix-config#$HOST'';
       };
     };
-
 }

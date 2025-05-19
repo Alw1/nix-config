@@ -10,7 +10,7 @@
       };
       waybar = {
         enable = true;
-        package = unstablePkgs.waybar;
+        package = pkgs.waybar;
       };
       dconf.enable = true;
       nautilus-open-any-terminal = {

@@ -1,4 +1,4 @@
-{ pkgs, unstablePkgs, config, lib, ... }: {
+{ pkgs, config, lib, ... }: {
 
 	options.hyprland.enable = lib.mkEnableOption "Enable Hyprland";
 	config = lib.mkIf config.hyprland.enable {
@@ -7,13 +7,11 @@
 				enable = true;
 				xwayland.enable = true;
 			};
+
 			hyprlock.enable = true;
-			waybar ={
-				enable = true;
-				package = unstablePkgs.waybar;
-			};
-			# nm-applet.enable = true;
-			
+
+			waybar.enable = true;
+
 			dconf.enable = true;
 		};
 
@@ -37,7 +35,6 @@
 
 		environment.systemPackages = with pkgs; [
 			swww
-			ags
 			hyprpolkitagent
 			wl-clipboard
 			libnotify 

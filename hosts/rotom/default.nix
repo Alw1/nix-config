@@ -1,10 +1,16 @@
-{ unstablePkgs, ... }: {
+{ pkgs, unstablePkgs, ... }: {
 
   imports = [
     ./hardware-configuration.nix
     ../../common
     ../../users/alex/user.nix
   ];
+
+  hyprland.enable = true;
+  gaming.enable = true;
+  # virtualization.enable = true;
+
+  hardware.graphics.enable = true;
 
   nix = {
     gc = {
@@ -27,14 +33,6 @@
 
   programs.nix-ld.enable = true;
   services = {
-    openssh = {
-      enable = true;
-      ports = [ 22 ];
-      settings = {
-        PasswordAuthentication = true;
-        PermitRootLogin = "prohibit-password";
-      };
-    };
 
     gvfs.enable = true;
     udisks2.enable = true;
@@ -82,50 +80,37 @@
       efiSysMountPoint = "/boot/";
     };
     grub = {
-      # extraConfig = "set theme=${pkgs.plasma5.breeze-grub}/grub/themes/breeze/theme.txt";
-      # splashImage = null;
       enable = true;
       efiSupport = true;
       useOSProber = true;
       device = "nodev";
+      # theme = "${pkgs.libsForQt5.breeze-grub}/grub/themes/breeze";
     };
   };
 
   programs = {
-    zsh = {
-      enable = true;
-      enableCompletion = true;
-      enableLsColors = true;
-      autosuggestions.enable = true;
-      syntaxHighlighting.enable = true;
-      shellAliases = {
-        rotom-update = ''nix flake update --flake ~/nix-config'';
-        rotom-upgrade = ''sudo nixos-rebuild switch --flake ~/nix-config#$HOST'';
-      };
-    };
+    # zsh = {
+    #   enable = true;
+    #   enableCompletion = true;
+    #   enableLsColors = true;
+    #   autosuggestions.enable = true;
+    #   syntaxHighlighting.enable = true;
+    #   shellAliases = {
+    #     rotom-update = ''nix flake update --flake ~/nix-config'';
+    #     rotom-upgrade = ''sudo nixos-rebuild switch --flake ~/nix-config#$HOST'';
+    #   };
+    # };
 
     firefox.enable = true;
 
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;
-      protontricks.enable = true;
-    };
-
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-	  package = unstablePkgs.neovim;
+	neovim = {
+	     enable = true;
+	     defaultEditor = true;
+	     package = unstablePkgs.neovim-unwrapped;
     };
   };
 
-  networking = {
-    hostName = "rotom";
-    networkmanager.enable = true;
-    firewall.enable = true;
-    nftables.enable = true;
-  };
+  networking.hostName = "rotom";
 
   system.stateVersion = "23.11";
 }
