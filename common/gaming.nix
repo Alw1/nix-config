@@ -3,7 +3,7 @@
 	options.gaming.enable = lib.mkEnableOption "Enable Steam and stuff";
 	config = lib.mkIf config.gaming.enable {
 
-		steam = {
+		programs.steam = {
 		  enable = true;
 		  remotePlay.openFirewall = true;
 		  dedicatedServer.openFirewall = true;

@@ -10,6 +10,7 @@ let packages = {
       stow
       pywal
       usbutils
+	  chezmoi
 	  yazi
       zip
       unzip
@@ -42,6 +43,7 @@ let packages = {
       libreoffice
       gparted
       gnome-disk-utility
+      mediawriter
       cheese
       woeusb
     ];

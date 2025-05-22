@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ unstablePkgs, ... }: {
 
   imports = [
     ./hardware-configuration.nix
@@ -7,6 +7,8 @@
   ];
 
   hyprland.enable = true;
+  GNOME.enable = true;
+  gaming.enable = true;
 
   hardware.opengl.enable = true;
 
@@ -27,7 +29,7 @@
   hardware.bluetooth = {
 		enable = true;
 		powerOnBoot = false;
-	};
+  };
 
   programs.nix-ld.enable = true;
   services = {
@@ -67,8 +69,6 @@
       efiSysMountPoint = "/boot/";
     };
     grub = {
-      # extraConfig = "set theme=${pkgs.plasma5.breeze-grub}/grub/themes/breeze/theme.txt";
-      # splashImage = null;
       enable = true;
       efiSupport = true;
       useOSProber = true;
@@ -80,7 +80,7 @@
 	   neovim = {
 	     enable = true;
 	     defaultEditor = true;
-	     # package = neovim;
+		 package = unstablePkgs.neovim-unwrapped;
     };
   };
 
